@@ -20,6 +20,17 @@ def add_new_todo():
     todos.append(request_body)  # Paso 2: Agregar el diccionario a la lista todos
     return jsonify(todos)  # Paso 3: Devolver la lista actualizada
 
+@app.route('/todos/<int:position>', methods=['DELETE'])
+def delete_todo(position):
+    # Asegurarse que la posición sea válida
+    if position < 0 or position >= len(todos):
+        return jsonify({"error": "Índice fuera de rango"}), 404
+    # Eliminar la tarea
+    del todos[position]
+    # Retornar la lista actualizada
+    return jsonify(todos)
+
+
 
 
 
